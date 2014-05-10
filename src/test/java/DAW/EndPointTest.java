@@ -58,4 +58,13 @@ public class EndPointTest {
         System.out.println(instance.toString());
     }
 
+    @Test
+    public void testProcessDumpLong() throws Exception {
+        System.out.println("processDump");
+        EndPoint instance = new EndPoint(EndPoint.class.getResource("/testLong.nt").getFile(), "http://myurl.com");
+        instance.processDump();
+        assertTrue("Capabilities should be 2", instance.getCapabilities().keySet().size() == 2);
+        System.out.println(instance.toString());
+    }
+
 }

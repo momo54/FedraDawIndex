@@ -77,8 +77,14 @@ public class EndPoint {
 
         NumberFormat nf = NumberFormat.getInstance(Locale.ENGLISH);
 
+        int i=0;
         for (Iterator<Map.Entry<String, Capability>> it = capabilities.entrySet().iterator(); it.hasNext();) {
             Capability c = (Capability) it.next().getValue();
+
+	    i++;
+            System.err.println("Processing:"+c.getProperty()+":"+i+" on "+capabilities.size());
+
+
             result.append(" ;\n  sd:capability [\n      sd:predicate <" + c.getProperty() + "> ;\n");
             result.append("      sd:totalTriples   " + c.getTotal() + " ;\n");
             result.append("      sd:avgSbjSel     \"" + nf.format(1 / ((double) c.getSubjectNb())) + "\" ;\n");

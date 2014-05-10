@@ -57,7 +57,7 @@ class Capability {
         Random rb = new Random(seedB);
         for (int i = 0; i < n; i++) {
             if (i % 100 == 0) {
-                System.err.println("processing perm:" + i + " on " + n);
+                System.err.print(".");
             }
             int ai = ra.nextInt();
             int bi = rb.nextInt();
@@ -71,6 +71,7 @@ class Capability {
             }
             mip.add(mini);
         }
+	System.err.print("\n");
     }
 
     public int getTotal() {
