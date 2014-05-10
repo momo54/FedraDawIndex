@@ -25,9 +25,9 @@ class Capability {
     public static int maxn = 10000;
 
     // idset for building a mip vector
-    private ArrayList<Integer> idSet = new ArrayList<Integer>(10000000);
-    private HashSet<Integer> subSet = new HashSet<Integer>(10000000);
-    private HashSet<Integer> objSet = new HashSet<Integer>(10000000);
+    private ArrayList<Integer> idSet = new ArrayList<Integer>();
+    private HashSet<Integer> subSet = new HashSet<Integer>();
+    private HashSet<Integer> objSet = new HashSet<Integer>();
     private ArrayList<Long> mip = new ArrayList<Long>();
     private String property;
 
