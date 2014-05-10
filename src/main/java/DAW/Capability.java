@@ -51,7 +51,7 @@ class Capability {
             n = maxn;
         }
 
-        System.err.println("Building mip for:" + property + "nb Id:" + idSet.size() + "nb perm:" + n);
+        System.err.println("Building mip for:" + property + ",nb Id:" + idSet.size() + ",nb perm:" + n);
 
         Random ra = new Random(seedA);
         Random rb = new Random(seedB);
