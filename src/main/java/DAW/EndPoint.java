@@ -73,8 +73,9 @@ public class EndPoint {
 
     public String toString() {
         StringBuffer result = new StringBuffer();
-        result.append("@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .");
-        result.append("\"[] <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> sd:Service ;\\n sd:endpointUrl <\"+url+\"> \"");
+        result.append("@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .\n");
+        result.append("[] <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> sd:Service ;\n");
+        result.append("sd:endpointUrl <\""+url+"\"> \"");
 
         NumberFormat nf = NumberFormat.getInstance(Locale.ENGLISH);
 
