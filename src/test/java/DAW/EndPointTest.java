@@ -46,7 +46,7 @@ public class EndPointTest {
         EndPoint instance = new EndPoint(EndPoint.class.getResource("/test.nt").getFile(), "http://myurl.com");
         instance.processDump();
         assertTrue("Capabilities should be 1", instance.getCapabilities().keySet().size() == 1);
-        System.out.println(instance.toString());
+        instance.print();
     }
 
     @Test
@@ -55,7 +55,7 @@ public class EndPointTest {
         EndPoint instance = new EndPoint(EndPoint.class.getResource("/testAverage.nt").getFile(), "http://myurl.com");
         instance.processDump();
         assertTrue("Capabilities should be 1", instance.getCapabilities().keySet().size() == 1);
-        System.out.println(instance.toString());
+        instance.print();
     }
 
     @Test
@@ -64,7 +64,7 @@ public class EndPointTest {
         EndPoint instance = new EndPoint(EndPoint.class.getResource("/testLong.nt").getFile(), "http://myurl.com");
         instance.processDump();
         assertTrue("Capabilities should be 2", instance.getCapabilities().keySet().size() == 2);
-        System.out.println(instance.toString());
+        instance.print();
     }
 
 }

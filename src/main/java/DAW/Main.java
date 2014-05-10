@@ -12,7 +12,7 @@ public class Main {
         Capability.maxn=new Integer(args[2]);
         EndPoint ep=new EndPoint(args[0],args[1]);
         ep.processDump();
-        System.out.println(ep.toString());
+        ep.print();
 
     }
 }

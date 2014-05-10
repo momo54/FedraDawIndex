@@ -69,11 +69,10 @@ public class EndPoint {
         br.close();
     }
 
-    public String toString() {
-        StringBuffer result = new StringBuffer();
-        result.append("@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .\n");
-        result.append("[] <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> sd:Service ;\n");
-        result.append("sd:endpointUrl <\""+url+"\"> \"");
+    public void print() {
+        System.out.println("@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .");
+        System.out.println("[] <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> sd:Service ;");
+        System.out.println("sd:endpointUrl <\""+url+"\"> \"");
 
         NumberFormat nf = NumberFormat.getInstance(Locale.ENGLISH);
 
@@ -84,15 +83,14 @@ public class EndPoint {
 	    i++;
             System.err.println("Processing:"+c.getProperty()+":"+i+" on "+capabilities.size());
 
-
-            result.append(" ;\n  sd:capability [\n      sd:predicate <" + c.getProperty() + "> ;\n");
-            result.append("      sd:totalTriples   " + c.getTotal() + " ;\n");
-            result.append("      sd:avgSbjSel     \"" + nf.format(1 / ((double) c.getSubjectNb())) + "\" ;\n");
-            result.append("      sd:avgObjSel     \"" + nf.format(1 / ((double) c.getObjectNb())) + "\" ;\n");
-            result.append("      sd:MIPs   \"");
-            result.append(c.getMipsAsString());
-            result.append("\" ; ] ");
+            System.out.println(" ;\n  sd:capability [\n      sd:predicate <" + c.getProperty() + "> ;");
+            System.out.println("      sd:totalTriples   " + c.getTotal() + " ;");
+            System.out.println("      sd:avgSbjSel     \"" + nf.format(1 / ((double) c.getSubjectNb())) + "\" ;");
+            System.out.println("      sd:avgObjSel     \"" + nf.format(1 / ((double) c.getObjectNb())) + "\" ;");
+            System.out.print("      sd:MIPs   \"");
+            System.out.println(c.getMipsAsString());
+            System.out.println("\" ; ] ");
+	    System.out.flush();
         }
-        return result.toString();
     }
 }
