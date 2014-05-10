@@ -7,6 +7,10 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Locale;
 import java.util.Map;
+import java.util.concurrent.CompletionService;
+import java.util.concurrent.ExecutorCompletionService;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -61,27 +65,43 @@ public class EndPoint {
             nb++;
 
             if (nb % 1000 == 0) {
-                System.err.println("Processed:"+nb+" lines");
-                System.err.println("Got:"+capabilities.size()+" different capabilities");
+                System.err.println("Processed:" + nb + " lines");
+                System.err.println("Got:" + capabilities.size() + " different capabilities");
             }
 
         }
         br.close();
+
+        //ok all capabilities created now, maybe thousands
+        ExecutorService threadPool = Executors.newFixedThreadPool(20);
+        CompletionService<String> pool = new ExecutorCompletionService<String>(threadPool);
+
+        Iterator it = capabilities.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry pairs = (Map.Entry) it.next();
+            pool.submit(new MipTask((Capability)pairs.getValue()));
+        }
+        
+        for (int i=0;i<capabilities.size();i++) {
+            String result=pool.take().get();
+            System.err.println(result+": mip completed");
+        }
+
     }
 
     public void print() {
         System.out.println("@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .");
         System.out.println("[] <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> sd:Service ;");
-        System.out.println("sd:endpointUrl <\""+url+"\"> \"");
+        System.out.println("sd:endpointUrl <\"" + url + "\"> \"");
 
         NumberFormat nf = NumberFormat.getInstance(Locale.ENGLISH);
 
-        int i=0;
+        int i = 0;
         for (Iterator<Map.Entry<String, Capability>> it = capabilities.entrySet().iterator(); it.hasNext();) {
             Capability c = (Capability) it.next().getValue();
 
-	    i++;
-            System.err.println("Processing:"+c.getProperty()+":"+i+" on "+capabilities.size());
+            i++;
+            System.err.println("Processing:" + c.getProperty() + ":" + i + " on " + capabilities.size());
 
             System.out.println(" ;\n  sd:capability [\n      sd:predicate <" + c.getProperty() + "> ;");
             System.out.println("      sd:totalTriples   " + c.getTotal() + " ;");
@@ -90,7 +110,7 @@ public class EndPoint {
             System.out.print("      sd:MIPs   \"");
             System.out.println(c.getMipsAsString());
             System.out.println("\" ; ] ");
-	    System.out.flush();
+            System.out.flush();
         }
     }
 }
