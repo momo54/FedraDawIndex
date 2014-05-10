@@ -21,8 +21,8 @@ class Capability {
     public static int seedA = 12345678;
     public static int seedB = 98765432;
 
-    // maxn = 10 -> n = 10% of total size
-    public static int maxn = 100;
+    // maxpermutation
+    public static int maxn = 10000;
 
     // idset for building a mip vector
     private ArrayList<Integer> idSet = new ArrayList<Integer>(10000000);
@@ -46,7 +46,10 @@ class Capability {
     public void buildMipVector() {
 
         int total = idSet.size();
-        int n = total > maxn ? (int) (((double) total) / maxn) : total;
+        int n = total > 10 ? (int) (((double) total) / 10) : total;
+        if (n > maxn) {
+            n = maxn;
+        }
 
         System.err.println("Building mip for:" + property + "nb Id:" + idSet.size() + "nb perm:" + n);
 

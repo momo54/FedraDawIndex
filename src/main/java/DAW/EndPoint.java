@@ -3,12 +3,10 @@ package DAW;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.text.NumberFormat;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Locale;
 import java.util.Map;
-import jdk.nashorn.internal.objects.NativeArray;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
