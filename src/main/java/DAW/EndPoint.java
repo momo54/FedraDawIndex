@@ -94,7 +94,7 @@ public class EndPoint {
     public void print() {
         System.out.println("@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .");
         System.out.println("[] <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> sd:Service ;");
-        System.out.println("sd:endpointUrl <\"" + url + "\"> \"");
+        System.out.println("sd:endpointUrl <" + url + "> ");
 
         NumberFormat nf = NumberFormat.getInstance(Locale.ENGLISH);
 
@@ -110,8 +110,8 @@ public class EndPoint {
             System.out.println("      sd:avgSbjSel     \"" + nf.format(1 / ((double) c.getSubjectNb())) + "\" ;");
             System.out.println("      sd:avgObjSel     \"" + nf.format(1 / ((double) c.getObjectNb())) + "\" ;");
             System.out.print("      sd:MIPs   \"");
-            System.out.println(c.getMipsAsString());
-            System.out.println("\" ; ] ");
+            System.out.println(c.getMipsAsString()+"\"");
+            System.out.println(" ; ] ");
             System.out.flush();
         }
     }
