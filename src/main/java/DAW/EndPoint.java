@@ -87,6 +87,8 @@ public class EndPoint {
             System.err.println(result+": mip completed");
         }
 
+	threadPool.shutdown();
+
     }
 
     public void print() {
