@@ -21,7 +21,7 @@ public class MipTask implements Callable<String> {
     
     public String call() {
         c.buildMipVector();
-        return c.getMipsAsString()+" finished";
+        return c.getProperty()+" finished";
     }
 }
 
