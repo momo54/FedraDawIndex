@@ -105,7 +105,7 @@ public class EndPoint {
             i++;
             System.err.println("Processing:" + c.getProperty() + ":" + i + " on " + capabilities.size());
 
-            System.out.println(" ;\n  sd:capability [\n      sd:predicate <" + c.getProperty() + "> ;");
+            System.out.println(" ;\n  sd:capability [\n      sd:predicate " + c.getProperty() + " ;");
             System.out.println("      sd:totalTriples   " + c.getTotal() + " ;");
             System.out.println("      sd:avgSbjSel     \"" + nf.format(1 / ((double) c.getSubjectNb())) + "\" ;");
             System.out.println("      sd:avgObjSel     \"" + nf.format(1 / ((double) c.getObjectNb())) + "\" ;");
