@@ -50,6 +50,7 @@ public class EndPoint {
         BufferedReader br = new BufferedReader(new FileReader(dumpFileName));
         String line;
         while ((line = br.readLine()) != null) {
+            line = line.substring(0, line.lastIndexOf("."));
             String[] triple = line.split("\\s");
             Capability capability = capabilities.get(triple[1]);
 
