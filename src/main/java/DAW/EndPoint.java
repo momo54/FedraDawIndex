@@ -57,6 +57,17 @@ public class EndPoint {
                 capability = new Capability(triple[1]);
                 capabilities.put(capability.getProperty(), capability);
             }
+            /* triple object may containt white spaces, 
+               triple[2] should has the whole object not just the first object word
+             */
+            if (triple.length > 3) {
+                int p = triple[0].length();
+                String l = line.substring(p); // remove subject
+                p = l.indexOf(triple[1]) + triple[1].length();
+                l = l.substring(p); // remove predicate
+                p = l.indexOf(triple[2]);
+                triple[2] = l.substring(p); // remove whitespaces before object
+            }
 
             String v = triple[0] + triple[2];
             capability.addSubj(triple[0].hashCode());
@@ -107,12 +118,13 @@ public class EndPoint {
 
             System.out.println(" ;\n  sd:capability [\n      sd:predicate " + c.getProperty() + " ;");
             System.out.println("      sd:totalTriples   " + c.getTotal() + " ;");
-            System.out.println("      sd:avgSbjSel     \"" + nf.format(1 / ((double) c.getSubjectNb())) + "\" ;");
-            System.out.println("      sd:avgObjSel     \"" + nf.format(1 / ((double) c.getObjectNb())) + "\" ;");
+            System.out.println("      sd:avgSbjSel     \"" + (1 / ((double) c.getSubjectNb())) + "\" ;");
+            System.out.println("      sd:avgObjSel     \"" + (1 / ((double) c.getObjectNb())) + "\" ;");
             System.out.print("      sd:MIPs   \"");
             System.out.println(c.getMipsAsString()+"\"");
             System.out.println(" ; ] ");
             System.out.flush();
         }
+        
     }
 }
